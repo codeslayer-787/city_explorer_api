@@ -7,7 +7,6 @@ const app = express();
 app.use(cors());
 
 const PORT =  process.env.PORT || 3001;
-console.log(process.env.candy);
 
 app.listen(PORT, () => console.log(`app is alive ${PORT}`));
 

@@ -19,7 +19,7 @@ This app was writen with HTML5, CSS, and JavaScript.  Node.js was used to deploy
 
 02-22-2021 5:30pm - Uploaded the server files and deployed server.
 
-02-22-2021 - Application now has a fully-functional express server, with a GET route for the location resource.
+02-22-2021 10:09pm Application now displays location and weather.
 
 ## Credits and Collaborations
 

@@ -16,17 +16,15 @@ Find the app at https://github.com/codeslayer-787/city_explorer_api
 This app was writen with HTML5, CSS, and JavaScript.  Node.js was used to deploy a virtual server and Heroku for the final deployemnt.  
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an examples:
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource.
+02-22-2021 9:59pm - Application now has a fully-functional express server, with a GET route for the location resource.
 
 ## Credits and Collaborations
+
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 -->
 # city_explorer_api
 Initial City Explorer API Deployment
-
-Find the app at https://github.com/codeslayer-787/city_explorer_api
 
 Number and name of feature: Initial Deploy
 
@@ -34,6 +32,6 @@ Estimate of time needed to complete: 4 hours
 
 Start time: 3:30pm CST
 
-Finish time: _____
+Finish time: 10:02pm CST
 
-Actual time needed to complete: _____
+Actual time needed to complete: Approximately 5 hours of work

@@ -46,11 +46,12 @@ function City(dataFromFile, cityName){
   console.log(this.longitude);
 }
 
-function Forecast(forecast, time){
+function Forecast(forecast, time, city){
   this.forecast = forecast;
   this.time = time;
   console.log(this.forecast);
-  // this.city = city;
+  this.city = city;
+  console.log(city);
 }
 
 

@@ -1,9 +1,11 @@
+
+// Packages
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+//Set up the App
 const app = express();
-//talks to the server
 app.use(cors());
 
 
@@ -11,7 +13,7 @@ const PORT =  process.env.PORT || 3001;
 
 app.listen(PORT, () => console.log(`app is alive ${PORT}`));
 
-//Instantiating The Server
+//Initialize The Server
 const locationData = require('./data/location.json');
 const weatherData = require('./data/weather.json');
 
@@ -20,7 +22,7 @@ app.get('/location',(req, res) => {
   const city1 = new City(locationData, req.query);
   res.send(city1);
 });
-
+//const cityName = req.query;
 function City(dataFromFile, cityName){
   this.search_query = cityName,
   this.formatted_query = dataFromFile[0].display_name,

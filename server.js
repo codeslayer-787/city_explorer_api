@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`app is alive ${PORT}`));
 
 //Initialize The Server
-const weatherData = require('./data/weather.json');
+// const weatherData = require('./data/weather.json');
 
 
 //Adds Location
@@ -44,29 +44,26 @@ function City(dataFromFile, cityName) {
 }
 
 
-app.get('/weather', getWeatherData);
-function getWeatherData(req, res) {
-  let forecast = new WeatherForecast(weatherData, req.query);
-  res.send(forecast);
+app.get('/weather', handleGetWeather);
+function handleGetWeather(req, res) {
+  console.log('in the weather', req.query);
+  superagent.get(`http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${req.query.latitude}&lon=${req.query.longitude}`)
+    .then(weatherData => {
+      console.log('in the weather.then', weatherData.body.data);
+      const wxArr = weatherData.body.data.map(wxOutput);
+      function wxOutput(day) {
+        return new Forecast(day);
+      }
+      res.send(wxArr);
+    })
+    .catch(errorThatComesBack => {
+      res.status(500).send(errorThatComesBack);
+    });
+
+
+  function Forecast(wxData) {
+    this.forecast = wxData.weather.description;
+    this.time = wxData.datetime;
+    console.log(this.forecast);
+  }
 }
-//To catch errors and give a message back
-// req.catch(errorThatComesBack) => {
-//   res.status(500).send('This is an error');
-// };
-
-function WeatherForecast(weatherData) {
-
-  return weatherData = weatherData.data.map(weatherItem =>
-    new Forecast(weatherItem.weather.description, weatherItem.datetime)
-  );
-  // return dasForecast;
-}
-
-
-function Forecast(forecast, time) {
-  this.forecast = forecast;
-  this.time = time;
-  console.log(this.forecast);
-}
-
-

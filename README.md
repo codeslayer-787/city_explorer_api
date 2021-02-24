@@ -19,9 +19,11 @@ This app was writen with HTML5, CSS, and JavaScript.  Node.js was used to deploy
 
 02-22-2021 5:30pm - Uploaded the server files and deployed server.
 
-02-22-2021 10:09pm Application now displays location and weather.
+02-22-2021 10:09pm - Application now displays location and weather.
 
-02-23-2020 8:10pm Application now displays location through LocationIQ API.
+02-23-2020 8:10pm - Application now displays location through LocationIQ API.
+
+02-23-2020 11:12pm - Application now displays weather data.
 
 ## Credits and Collaborations
 

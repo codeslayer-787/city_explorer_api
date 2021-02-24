@@ -12,7 +12,6 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => console.log(`app is alive ${PORT}`));
 
 //Initialize The Server
 // const weatherData = require('./data/weather.json');
@@ -43,27 +42,28 @@ function City(dataFromFile, cityName) {
   console.log(this.longitude);
 }
 
-
+//Slightly different approach than location... for testing purposes
 app.get('/weather', handleGetWeather);
 function handleGetWeather(req, res) {
   console.log('in the weather', req.query);
   superagent.get(`http://api.weatherbit.io/v2.0/forecast/daily?key=${process.env.WEATHER_API_KEY}&lat=${req.query.latitude}&lon=${req.query.longitude}`)
     .then(weatherData => {
       console.log('in the weather.then', weatherData.body.data);
-      const wxArr = weatherData.body.data.map(wxOutput);
-      function wxOutput(day) {
+      const weatherArray = weatherData.body.data.map(weatherOutput);
+      function weatherOutput(day) {
         return new Forecast(day);
       }
-      res.send(wxArr);
+      res.send(weatherArray);
     })
     .catch(errorThatComesBack => {
       res.status(500).send(errorThatComesBack);
     });
 
 
-  function Forecast(wxData) {
-    this.forecast = wxData.weather.description;
-    this.time = wxData.datetime;
+  function Forecast(weatherData) {
+    this.forecast = weatherData.weather.description;
+    this.time = weatherData.datetime;
     console.log(this.forecast);
   }
 }
+app.listen(PORT, () => console.log(`app is alive ${PORT}`));

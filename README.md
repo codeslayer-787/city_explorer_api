@@ -25,6 +25,8 @@ This app was writen with HTML5, CSS, and JavaScript.  Node.js was used to deploy
 
 02-23-2020 11:12pm - Application now displays weather data.
 
+02-23-2020 3:59pm - Fixes some minor syntax.
+
 ## Credits and Collaborations
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->

@@ -21,11 +21,13 @@ This app was writen with HTML5, CSS, and JavaScript.  Node.js was used to deploy
 
 02-22-2021 10:09pm - Application now displays location and weather.
 
-02-23-2020 8:10pm - Application now displays location through LocationIQ API.
+02-23-2021 8:10pm - Application now displays location through LocationIQ API.
 
-02-23-2020 11:12pm - Application now displays weather data.
+02-23-2021 11:12pm - Application now displays weather data.
 
-02-23-2020 3:59pm - Fixes some minor syntax.
+02-24-2021 3:59pm - Fixes some minor syntax.
+
+02-24-2021 5:01pm - Adds the parks route.
 
 ## Credits and Collaborations
 

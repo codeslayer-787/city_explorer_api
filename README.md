@@ -21,20 +21,9 @@ This app was writen with HTML5, CSS, and JavaScript.  Node.js was used to deploy
 
 02-22-2021 10:09pm Application now displays location and weather.
 
+02-23-2020 8:10pm Application now displays location through LocationIQ API.
+
 ## Credits and Collaborations
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 -->
-# city_explorer_api
-
-Initial City Explorer API Deployment
-
-Number and name of feature: Initial Deployment
-
-Estimate of time needed to complete: 4 hours
-
-Start time: 3:30pm CST
-
-Finish time: 10:09pm
-
-Actual time needed to complete: Approximately 5 hours

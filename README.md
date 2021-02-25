@@ -11,6 +11,8 @@ This app contains a seach box.  You enter a city name and the app will return th
 
 Find the app at https://github.com/codeslayer-787/city_explorer_api
 
+
+
 ## Architecture
 
 This app was writen with HTML5, CSS, and JavaScript.  Node.js was used to deploy a virtual server and Heroku for the final deployemnt.  
@@ -28,6 +30,8 @@ This app was writen with HTML5, CSS, and JavaScript.  Node.js was used to deploy
 02-24-2021 3:59pm - Fixes some minor syntax.
 
 02-24-2021 5:01pm - Adds the parks route.
+
+02-24-2021 10:40pm - SQL enabled backend deployed to heroku.
 
 ## Credits and Collaborations
 

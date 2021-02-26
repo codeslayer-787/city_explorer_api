@@ -33,6 +33,8 @@ This app was writen with HTML5, CSS, and JavaScript.  Node.js was used to deploy
 
 02-24-2021 10:40pm - SQL enabled backend deployed to heroku.
 
+02-25-2021 6:31pm - Adds the movies route.
+
 ## Credits and Collaborations
 
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->

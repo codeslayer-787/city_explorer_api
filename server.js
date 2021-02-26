@@ -6,6 +6,7 @@ const superagent = require('superagent');
 require('dotenv').config();
 const pg = require('pg');
 const PARKS_API_KEY = process.env.PARKS_API_KEY;
+const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
 //Set up the App
 const app = express();
 app.use(cors());
@@ -22,7 +23,6 @@ const PORT = process.env.PORT || 3001;
 app.get('/', (req, res) => {
   client.query('SELECT * FROM cities')
     .then(resultsHere => {
-      console.log(resultsHere);
       res.send(resultsHere);
     });
 });
@@ -40,11 +40,9 @@ app.get('/location', (req, res) => {
         console.log(`${city} is already in the database`);
         return res.send(results.rows[0]);
       } else {
-        console.log(req.query);
         const url = `https://us1.locationiq.com/v1/search.php?key=${process.env.GEOCODE_API_KEY}&q=${city}&format=json`;
         superagent.get(url)
           .then(data => {
-            console.log('crazy SQL', data.body[0]);
             let search_query = city;
             let formatted_query = data.body[0].display_name;
             let latitude = data.body[0].lat;
@@ -112,6 +110,31 @@ function Park(object) {
   this.fee = object.entranceFees[0].cost;
   this.description = object.description;
   this.url = object.url;
+}
+//Adding movies to the API
+app.get('/movies', handleGetMovies);
+function handleGetMovies(req, res) {
+  const city = req.query.search_query;
+  superagent.get(`https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&language=en-US&query=${city}&page=1&include_adult=false`)
+    .then(moviesData => {
+      console.log(moviesData.body);
+      const moviesArray = moviesData.body.results.map(newMovie => new Movie(newMovie));
+      res.send(moviesArray);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send('Error loading movies data');
+    });
+}
+//Creates Movies Objecs
+function Movie(object) {
+  this.title = object.title;
+  this.overview = object.overview;
+  this.average_votes = object.vote_average;
+  this.total_votes = object.vote_count;
+  this.image_url = 'https://image.tmdb.org/t/p/w500' + object.poster_path;
+  this.popularity = object.popularity;
+  this.released_on = object.release_date;
 }
 
 client.connect().then(() => {

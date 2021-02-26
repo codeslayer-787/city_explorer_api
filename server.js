@@ -7,6 +7,8 @@ require('dotenv').config();
 const pg = require('pg');
 const PARKS_API_KEY = process.env.PARKS_API_KEY;
 const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
+const YELP_API_KEY = process.env.YELP_API_KEY;
+
 //Set up the App
 const app = express();
 app.use(cors());
@@ -50,6 +52,8 @@ app.get('/location', (req, res) => {
             new City(search_query, formatted_query, latitude, longitude);
             let SQL = 'INSERT INTO cities (search_query, formatted_query, latitude, longitude) VALUES ($1, $2, $3, $4) RETURNING * ';
             let VALUES = [search_query, formatted_query, latitude, longitude];
+            console.log(city.body);
+
             client.query(SQL, VALUES)
               .then(results => {
                 console.log(results);
@@ -117,7 +121,6 @@ function handleGetMovies(req, res) {
   const city = req.query.search_query;
   superagent.get(`https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&language=en-US&query=${city}&page=1&include_adult=false`)
     .then(moviesData => {
-      console.log(moviesData.body);
       const moviesArray = moviesData.body.results.map(newMovie => new Movie(newMovie));
       res.send(moviesArray);
     })
@@ -126,7 +129,7 @@ function handleGetMovies(req, res) {
       res.status(500).send('Error loading movies data');
     });
 }
-//Creates Movies Objecs
+//Creates Movies Objects
 function Movie(object) {
   this.title = object.title;
   this.overview = object.overview;
@@ -136,7 +139,30 @@ function Movie(object) {
   this.popularity = object.popularity;
   this.released_on = object.release_date;
 }
+//Adds Yelp route to API
+app.get('/yelp', handleGetYelp);
+function handleGetYelp(req, res) {
+  const city = req.query.search_query;
+  superagent.get(`https://api.yelp.com/v3/businesses/search?location=${city}`)
+    .set('Authorization', `Bearer ${YELP_API_KEY}`)
+    .then(yelpData => {
+      const yelpArray = yelpData.body.businesses.map(newReview => new YelpReview(newReview));
+      res.send(yelpArray);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send('Error loading Yelp Data!');
+    });
+}
+function YelpReview(object) {
+  this.name = object.name;
+  this.image_url = object.image_url;
+  this.price = object.price;
+  this.rating = object.rating;
+  this.url = object.url;
+}
 
 client.connect().then(() => {
   app.listen(PORT, () => console.log(`app is alive ${PORT}`));
 });
+
